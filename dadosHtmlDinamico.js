@@ -1,12 +1,37 @@
+function Estrelinha()
+{
+    $(".my-rating")
+    .starRating({
+    initialRating: 4,
+    strokeColor: '#894A00',
+    strokeWidth: 10,
+    starSize: 25
+    });
+}
+
+function PegarNomes()
+{
+    var generos = ArrayDeFilmes();
+
+    var nome = generos
+    .map(function(item, indice){
+        return item.filmes
+        .map(function(data){
+            return console.log(data.nome)
+        });
+    });
+}
+
 
 function SetStorage()
 {
-
-
     localStorage.setItem('filmeExecutando','Ok')
 
+    var nome = PegarNomes();
+
     let text;
-    if (confirm(`Deseja pausar ?`)) {
+
+    if (confirm(`Deseja pausar ${nome}?`)) {
         text = 'Filme pausado!'
         localStorage.removeItem('filmeExecutando')
     } 
@@ -14,8 +39,8 @@ function SetStorage()
         text = 'Filme executando !'
         localStorage.setItem('filmeExecutando','Ok')
     }
-    
-    
+
+  
 }
 
 function ConstroiTabelaFilmes() 
@@ -60,7 +85,7 @@ function ConstroiTabelaFilmes()
                     <td>" + filme.image + "</td> \
                     <td>" + filme.ativo + "</td> \
                     <td>" + filme.dataCriacao + "</td> \
-                    <td>" + filme.avaliacao + "<td> \
+                    <td class= my-rating><td> \
                         <button name='' onclick='SetStorage()'>&#10148</button> \
                     </td> \
                     </tr>";   
@@ -72,3 +97,4 @@ function ConstroiTabelaFilmes()
             document.getElementById('containerTabelasFilmes').innerHTML = html;
     }
 }
+
